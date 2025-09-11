@@ -22,3 +22,25 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-tenant
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:qwy86645/kardio.git
+    targetRevision: HEAD
+    path: apps/minio-tenant
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: storage
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
