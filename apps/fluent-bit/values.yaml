@@ -513,7 +513,7 @@ initContainers: []
 logLevel: info
 
 hotReload:
-  enabled: true
+  enabled: false
   image:
     repository: ghcr.io/jimmidyson/configmap-reload
     tag: v0.15.0
