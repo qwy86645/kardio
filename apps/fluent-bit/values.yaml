@@ -435,6 +435,7 @@ config:
         tls.verify false
         endpoint https://minio-service.minio.svc.cluster.local:9000
         upload_timeout 1m
+        s3_key_format /fluent-bit-logs/$TAG
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
   ## This configuration is deprecated, please use `extraFiles` instead.
   upstream: {}
