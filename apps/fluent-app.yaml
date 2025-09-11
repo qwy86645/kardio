@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     repoURL: fluent.github.io/helm-charts
-    chart: fluentbit
+    chart: fluent-bit
     targetRevision: 0.53.0
 
   syncPolicy:
