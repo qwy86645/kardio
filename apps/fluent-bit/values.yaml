@@ -433,8 +433,8 @@ config:
         Match   *
         Bucket  k-log
         tls.verify false
-        endpoint http://minio-service.minio.svc.cluster.local:9000
-
+        endpoint https://minio-service.minio.svc.cluster.local:9000
+        upload_timeout 1m
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
   ## This configuration is deprecated, please use `extraFiles` instead.
   upstream: {}
