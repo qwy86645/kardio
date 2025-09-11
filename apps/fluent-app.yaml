@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: fluent.github.io/helm-charts
     chart: fluent-bit
-    targetRevision: 0.53.0
+    targetRevision: 4.0.7
 
   syncPolicy:
     automated:
