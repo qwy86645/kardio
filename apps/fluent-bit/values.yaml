@@ -319,9 +319,9 @@ priorityClassName: ""
 
 env:
 - name: AWS_ACCESS_KEY_ID
-  value: console
+  value: JNF6LiaROILhMNK7E8YR
 - name: AWS_SECRET_ACCESS_KEY
-  value: some-password
+  value: ExaId9cDYcnJn1oVOGpKIYqMzCK2NFJkSdWlJFzT
 #  - name: FOO
 #    value: "bar"
 
