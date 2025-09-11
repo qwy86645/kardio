@@ -9,7 +9,7 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   source:
-    repoURL: fluent.github.io/helm-charts
+    repoURL: https://fluent.github.io/helm-charts
     chart: fluent-bit
     targetRevision: 4.0.7
 
