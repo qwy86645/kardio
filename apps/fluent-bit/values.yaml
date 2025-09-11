@@ -317,7 +317,11 @@ terminationGracePeriodSeconds:
 
 priorityClassName: ""
 
-env: []
+env:
+- name: AWS_ACCESS_KEY_ID
+  value: console
+- name: AWS_SECRET_ACCESS_KEY
+  value: some-password
 #  - name: FOO
 #    value: "bar"
 
