@@ -425,11 +425,13 @@ config:
   ## https://docs.fluentbit.io/manual/pipeline/outputs
   outputs: |
     [OUTPUT]
-        Name    file
+        Name    s3
         Match   *
-        Path    /nfs-logs
-        Format  plain
-        Mkdir   On
+        Bucket  k-log
+        tls.verify false
+        endpoint http://minio.minio-service.svc.cluster.local
+        total_file_size 5M
+        upload_timeout 1m
 
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
   ## This configuration is deprecated, please use `extraFiles` instead.
