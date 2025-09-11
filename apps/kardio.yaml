@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fluentbit
+  name: fluent-bit
   namespace: argocd
 spec:
   project: default
-  destination:
-    namespace: monitoring
-    server: https://kubernetes.default.svc
   source:
-    repoURL: https://fluent.github.io/helm-charts
-    chart: fluent-bit
-    targetRevision: 0.53.0
+    repoURL: git@github.com:qwy86645/kardio.git
+    targetRevision: HEAD
+    path: apps/fluent-bit
     helm:
       valueFiles:
-      - ./fluent-value.yaml
+      - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
 
   syncPolicy:
     automated:
