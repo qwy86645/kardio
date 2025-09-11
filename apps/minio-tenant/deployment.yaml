@@ -49,6 +49,6 @@ spec:
         resources:
           requests:
             storage: 100Gi
-        storageClassName: local-path
+        storageClassName: standard
   users:
   - name: storage-user
