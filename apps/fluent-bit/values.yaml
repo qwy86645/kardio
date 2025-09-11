@@ -203,6 +203,19 @@ resources: {}
 #   requests:
 #     cpu: 100m
 #     memory: 128Mi
+openShift:
+  enabled: false
+  securityContextConstraints:
+    # Create SCC for Fluent-bit and allow use it
+    create: true
+    name: ""
+    annotations: {}
+    runAsUser:
+      type: RunAsAny
+    seLinuxContext:
+      type: MustRunAs
+    # Use existing SCC in cluster, rather then create new one
+    existingName: ""
 
 ## only available if kind is Deployment
 ingress:
