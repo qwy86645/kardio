@@ -52,3 +52,24 @@ spec:
         storageClassName: standard
   users:
   - name: storage-user
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-service
+  namespace: minio
+  labels:
+    app: minio
+spec:
+  type: ClusterIP
+  selector:
+    v1.min.io/tenant: minio
+  ports:
+  - name: api
+    protocol: TCP
+    port: 9000
+    targetPort: 9000
+  - name: console
+    protocol: TCP
+    port: 9443
+    targetPort: 9443
