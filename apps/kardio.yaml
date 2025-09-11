@@ -36,7 +36,7 @@ spec:
     path: apps/minio-tenant
   destination:
     server: https://kubernetes.default.svc
-    namespace: storage
+    namespace: minio
 
   syncPolicy:
     automated:
