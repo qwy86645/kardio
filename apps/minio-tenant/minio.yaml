@@ -61,7 +61,7 @@ metadata:
   labels:
     app: minio
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     v1.min.io/tenant: minio
   ports:
