@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: fluent-bit
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -28,6 +30,8 @@ kind: Application
 metadata:
   name: minio-tenant
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -50,6 +54,8 @@ kind: Application
 metadata:
   name: metallb
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
