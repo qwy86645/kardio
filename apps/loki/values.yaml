@@ -1,5 +1,4 @@
 loki:
-
   enabled: true
   image:
     tag: 2.9.3
@@ -9,11 +8,9 @@ loki:
     type: ClusterIP
 
 grafana:
-
   enabled: true
   service:
     type: ClusterIP
-
   persistence:
     enabled: false
   sidecar:
