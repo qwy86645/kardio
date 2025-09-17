@@ -72,6 +72,8 @@ kind: Application
 metadata:
   name: infisical
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
