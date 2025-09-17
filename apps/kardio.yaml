@@ -1,83 +1,7 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: fluent-bit
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: git@github.com:qwy86645/kardio.git
-    targetRevision: HEAD
-    path: apps/fluent-bit
-    helm:
-      valueFiles:
-      - values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: minio-tenant
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: git@github.com:qwy86645/kardio.git
-    targetRevision: HEAD
-    path: apps/minio-tenant
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: minio
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: metallb
-  namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: git@github.com:qwy86645/kardio.git
-    targetRevision: HEAD
-    path: apps/cluster-addons/metallb
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: metallb-system
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
----
-
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
-#   name: loki
+#   name: fluent-bit
 #   namespace: argocd
 #   finalizers:
 #   - resources-finalizer.argocd.argoproj.io
@@ -86,7 +10,10 @@ spec:
 #   source:
 #     repoURL: git@github.com:qwy86645/kardio.git
 #     targetRevision: HEAD
-#     path: apps/loki
+#     path: apps/fluent-bit
+#     helm:
+#       valueFiles:
+#       - values.yaml
 #   destination:
 #     server: https://kubernetes.default.svc
 #     namespace: monitoring
@@ -97,12 +24,11 @@ spec:
 #       selfHeal: true
 #     syncOptions:
 #     - CreateNamespace=true
-
 # ---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
-#   name: infisical
+#   name: minio-tenant
 #   namespace: argocd
 #   finalizers:
 #   - resources-finalizer.argocd.argoproj.io
@@ -111,10 +37,10 @@ spec:
 #   source:
 #     repoURL: git@github.com:qwy86645/kardio.git
 #     targetRevision: HEAD
-#     path: apps/infisical
+#     path: apps/minio-tenant
 #   destination:
 #     server: https://kubernetes.default.svc
-#     namespace: infisical
+#     namespace: minio
 
 #   syncPolicy:
 #     automated:
@@ -122,3 +48,77 @@ spec:
 #       selfHeal: true
 #     syncOptions:
 #     - CreateNamespace=true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: metallb
+#   namespace: argocd
+#   finalizers:
+#   - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: git@github.com:qwy86645/kardio.git
+#     targetRevision: HEAD
+#     path: apps/cluster-addons/metallb
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: metallb-system
+
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     - CreateNamespace=true
+# ---
+
+# # apiVersion: argoproj.io/v1alpha1
+# # kind: Application
+# # metadata:
+# #   name: loki
+# #   namespace: argocd
+# #   finalizers:
+# #   - resources-finalizer.argocd.argoproj.io
+# # spec:
+# #   project: default
+# #   source:
+# #     repoURL: git@github.com:qwy86645/kardio.git
+# #     targetRevision: HEAD
+# #     path: apps/loki
+# #   destination:
+# #     server: https://kubernetes.default.svc
+# #     namespace: monitoring
+
+# #   syncPolicy:
+# #     automated:
+# #       prune: true
+# #       selfHeal: true
+# #     syncOptions:
+# #     - CreateNamespace=true
+
+# # ---
+# # apiVersion: argoproj.io/v1alpha1
+# # kind: Application
+# # metadata:
+# #   name: infisical
+# #   namespace: argocd
+# #   finalizers:
+# #   - resources-finalizer.argocd.argoproj.io
+# # spec:
+# #   project: default
+# #   source:
+# #     repoURL: git@github.com:qwy86645/kardio.git
+# #     targetRevision: HEAD
+# #     path: apps/infisical
+# #   destination:
+# #     server: https://kubernetes.default.svc
+# #     namespace: infisical
+
+# #   syncPolicy:
+# #     automated:
+# #       prune: true
+# #       selfHeal: true
+# #     syncOptions:
+# #     - CreateNamespace=true
