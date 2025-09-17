@@ -13,6 +13,8 @@ spec:
   template:
     metadata:
       name: '{{path[1]}}-kardio'
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
     spec:
       project: "kardio"
       source:
