@@ -9,7 +9,7 @@ spec:
       repoURL: git@github.com:qwy86645/kardio.git
       revision: HEAD
       directories:
-      - path: apps/*/
+      - path: apps/*
   template:
     metadata:
       name: '{{path[1]}}-kardio'
