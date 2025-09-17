@@ -1,0 +1,15 @@
+apiVersion: v2
+name: minio
+description: A Helm chart for minio
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+- name: minio/operator
+  repository: https://operator.min.io/
+  version: 7.1.1
+  alias: operator
+- name: minio/tenant
+  repository: https://operator.min.io/
+  version: 7.1.1
+  alias: tenant
