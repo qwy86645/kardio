@@ -36,7 +36,7 @@ spec:
   requestAutoCert: true
   configuration:
     name: storage-configuration
-  image: quay.io/minio/minio:RELEASE.2024-10-02T17-50-41Z
+  image: quay.io/minio/minio:RELEASE.2025-04-08T15-41-24Z
   mountPath: /export
   pools:
   - name: pool-0
