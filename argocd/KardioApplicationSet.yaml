@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: git@github.com:qwy86645/kardio.git
+      repoURL: git@github.com:qwy86645/kardio.git/apps
       revision: HEAD
       directories:
       - path: apps/*
