@@ -1,27 +1,11 @@
-annotations:
-  artifacthub.io/changes: |
-    - kind: changed
-      description: "Make securityContext of hot reload container configurable in fluent-bit chart"
-apiVersion: v1
-appVersion: 4.0.7
-description: Fast and lightweight log processor and forwarder or Linux, OSX and BSD
-  family operating systems.
-home: https://fluentbit.io/
-icon: https://raw.githubusercontent.com/cncf/artwork/master/projects/fluentd/fluentbit/icon/fluentbit-icon-color.svg
-keywords:
-- logging
-- fluent-bit
-- fluentd
-maintainers:
-- email: eduardo@calyptia.com
-  name: edsiper
-- email: naseem@transit.app
-  name: naseemkullah
-- email: towmeykaw@gmail.com
-  name: Towmeykaw
-- email: steve.hipwell@gmail.com
-  name: stevehipwell
+apiVersion: v2
 name: fluent-bit
-sources:
-- https://github.com/fluent/fluent-bit/
-version: 0.53.0
+description: A Helm chart for Fluent Bit
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+- name: fluent-bit
+  repository: https://fluent.github.io/helm-charts
+  version: 0.53.0
+  alias: app
