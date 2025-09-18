@@ -409,7 +409,7 @@ fluent-bit:
           Keep_Log          Off
           Labels            On
           Annotations       Off
-          
+
       [FILTER]
           Name           modify
           Match          kube.*
@@ -420,12 +420,11 @@ fluent-bit:
     outputs: |
       [OUTPUT]
           Name    s3
-          Match   kube.*
+          Match   *
           Bucket  k-log
           tls.verify false
           region eu-west-1
           endpoint https://minio.minio-kardio.svc.cluster.local
-          total_file_size 1M
           upload_timeout  60s
           s3_key_format        /%{namespace}/%{app}/%{pod}.json
           s3_key_format_tag_delimiters .-
