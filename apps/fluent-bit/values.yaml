@@ -400,36 +400,48 @@ fluent-bit:
     inputs: |
       [INPUT]
           Name              tail
-          Tag               kube.<namespace_name>.<pod_name>.<container_name>.<container_id>
           Path              /var/log/containers/*.log
-          Tag_Regex         (?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace_name>[^_]+)_(?<container_name>.+)-(?<container_id>[a-z0-9]{64})\.log$
-          Parser            cri
+          Parser            docker
+          Tag               kube.*
+          Refresh_Interval  5
+          Mem_Buf_Limit     50MB
+          Skip_Long_Lines   On
 
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |-
       [FILTER]
           Name                kubernetes
           Match               kube.*
-          Kube_Tag_Prefix     kube.
-          Regex_Parser        custom-tag
+          Kube_Tag_Prefix     kube.var.log.containers.
           Merge_Log           On
+          Keep_Log            Off
+          Annotations         Off
+          Labels              On
 
       [FILTER]
           Name    grep
           Match   kube.*
           Exclude $kubernetes['namespace_name'] kube-system
-
-    ## https://docs.fluentbit.io/manual/pipeline/outputs
+      [FILTER]
+          Name           modify
+          Match          kube.*
+          # Creo un campo filename che concatena i valori
+          Rename         kubernetes['namespace_name']   namespace
+          Rename         kubernetes['labels']['app']    app
+          Rename         kubernetes['pod_name']         pod
+          Add            s3_key  ${namespace}/${app}/${pod}.json
     outputs: |
       [OUTPUT]
           Name    s3
-          Match   *
+          Match   kube.*
           Bucket  k-log
           tls.verify false
           region eu-west-1
           endpoint https://minio.minio-kardio.svc.cluster.local
-          upload_timeout 1m
-          s3_key_format /fluent-bit-logs/$TAG
+          total_file_size 1M
+          upload_timeout  60s
+          s3_key_format        /%{namespace}/%{app}/%{pod}.json
+          s3_key_format_tag_delimiters .-
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
     ## This configuration is deprecated, please use `extraFiles` instead.
     upstream: {}
