@@ -8,4 +8,4 @@ dependencies:
 - name: loki-stack
   repository: https://grafana.github.io/helm-charts
   version: 2.10.2
-  alias: app
+  # alias: app
