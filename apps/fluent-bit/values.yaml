@@ -319,9 +319,9 @@ priorityClassName: ""
 
 env:
 - name: AWS_ACCESS_KEY_ID
-  value: JNF6LiaROILhMNK7E8YR
+  value: minio
 - name: AWS_SECRET_ACCESS_KEY
-  value: ExaId9cDYcnJn1oVOGpKIYqMzCK2NFJkSdWlJFzT
+  value: minio123
 #  - name: FOO
 #    value: "bar"
 
@@ -433,7 +433,7 @@ config:
         Match   *
         Bucket  k-log
         tls.verify false
-        endpoint https://minio-service.minio.svc.cluster.local:9000
+        endpoint https://minio.minio-cardio.svc.cluster.local:443
         upload_timeout 1m
         s3_key_format /fluent-bit-logs/$TAG
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
