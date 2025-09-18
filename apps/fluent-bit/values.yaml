@@ -408,16 +408,16 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |-
       [FILTER]
-        Name                kubernetes
-        Match               kube.*
-        Kube_Tag_Prefix     kube.
-        Regex_Parser        custom-tag
-        Merge_Log           On
+          Name                kubernetes
+          Match               kube.*
+          Kube_Tag_Prefix     kube.
+          Regex_Parser        custom-tag
+          Merge_Log           On
 
       [FILTER]
-        Name    grep
-        Match   kube.*
-        Exclude $kubernetes['namespace_name'] kube-system
+          Name    grep
+          Match   kube.*
+          Exclude $kubernetes['namespace_name'] kube-system
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
@@ -437,9 +437,9 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/parsers
     customParsers: |
       [PARSER]
-        Name    custom-tag
-        Format  regex
-        Regex   ^(?<namespace_name>[^_]+)\.(?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)\.(?<container_name>.+)\.(?<container_id>[a-z0-9]{64})
+          Name    custom-tag
+          Format  regex
+          Regex   ^(?<namespace_name>[^_]+)\.(?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)\.(?<container_name>.+)\.(?<container_id>[a-z0-9]{64})
 
     # This allows adding more files with arbitrary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
