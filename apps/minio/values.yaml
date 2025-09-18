@@ -5,7 +5,7 @@ tenant:
     # The Tenant name
     #
     # Change this to match your preferred MinIO Tenant name.
-    name: myminio
+    name: minio
     ###
     # Specify the Operator container image to use for the deployment.
     # ``image.tag`` 
@@ -90,11 +90,11 @@ tenant:
     #    accessKey: minio
     #    secretKey: minio123
     #
-    configSecret:
-      name: myminio-env-configuration
-      accessKey: minio
-      secretKey: minio123
-      #existingSecret: true
+    # configSecret:
+    #   name: myminio-env-configuration
+    #   accessKey: minio
+    #   secretKey: minio123
+    #   #existingSecret: true
 
       ###
       # Metadata that will be added to the statefulset and pods of all pools
@@ -513,14 +513,14 @@ tenant:
 
   # Use an extraResources template section to include additional Kubernetes resources
   # with the Helm deployment.
-  #extraResources:
-  #  - |
-  #    apiVersion: v1
-  #    kind: Secret
-  #    type: Opaque
-  #    metadata:
-  #      name: {{ dig "tenant" "configSecret" "name" "" (.Values | merge (dict)) }}
-  #    stringData:
-  #      config.env: |-
-  #        export MINIO_ROOT_USER='minio'
-  #        export MINIO_ROOT_PASSWORD='minio123'
+  extraResources:
+   - |
+     apiVersion: v1
+     kind: Secret
+     type: Opaque
+     metadata:
+       name: {{ dig "tenant" "configSecret" "name" "" (.Values | merge (dict)) }}
+     stringData:
+       config.env: |-
+         export MINIO_ROOT_USER='minio'
+         export MINIO_ROOT_PASSWORD='minio123'
