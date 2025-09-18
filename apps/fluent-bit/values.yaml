@@ -424,8 +424,7 @@ fluent-bit:
       [FILTER]
           Name    rewrite_tag
           Match   kube.*
-          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json false
-
+          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name']/$kubernetes['labels']['app']/$kubernetes['pod_name'].json false
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
       [OUTPUT]
@@ -433,6 +432,7 @@ fluent-bit:
           Match   *
           Bucket  k-log
           tls.verify false
+          region eu-west-1
           endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout 1m
           s3_key_format /fluent-bit-logs/$TAG
