@@ -31,7 +31,7 @@ tenant:
     #
     image:
       repository: quay.io/minio/minio
-      tag: RELEASE.2025-04-08T15-41-24Z
+      tag: RELEASE.2025-09-07T16-13-09Z
       pullPolicy: IfNotPresent
     ###
     #
@@ -522,5 +522,5 @@ tenant:
       name: {{ dig "tenant" "configSecret" "name" "" (.Values | merge (dict)) }}
     stringData:
       config.env: |-
-        export MINIO_ROOT_USER='minio'
-        export MINIO_ROOT_PASSWORD='minio123'
+        export MINIO_ROOT_USER='admin'
+        export MINIO_ROOT_PASSWORD='Cr1tic4lmass!'
