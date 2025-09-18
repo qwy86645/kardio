@@ -415,14 +415,10 @@ fluent-bit:
         Merge_Log           On
 
       [FILTER]
-          Name    grep
-          Match   kube.*
-          Exclude $kubernetes['namespace_name'] kube-system
+        Name    grep
+        Match   kube.*
+        Exclude $kubernetes['namespace_name'] kube-system
 
-      # [FILTER]
-      #     Name    rewrite_tag
-      #     Match   kube.*
-      #     Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name']/$kubernetes['labels']['app']/$kubernetes['pod_name'].json false
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
       [OUTPUT]
