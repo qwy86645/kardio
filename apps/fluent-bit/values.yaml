@@ -395,11 +395,8 @@ fluent-bit:
       [INPUT]
           Name              tail
           Path              /var/log/containers/*.log
-          Parser            docker
           Tag               kube.*
-          Refresh_Interval  5
-          Mem_Buf_Limit     50MB
-          Skip_Long_Lines   On
+          Parser            cri
 
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |-
@@ -437,12 +434,11 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/parsers
     customParsers: |
       [PARSER]
-        Name        docker
-        Format      json
-        Time_Key    time
-        Time_Format %Y-%m-%dT%H:%M:%S.%L
-        Time_Keep   On
-        Decode_Field_As   escaped    log
+          Name docker_no_time
+          Format json
+          Time_Keep Off
+          Time_Key time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
 
     # This allows adding more files with arbitrary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
