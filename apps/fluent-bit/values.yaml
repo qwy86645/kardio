@@ -386,15 +386,9 @@ fluent-bit:
   config:
     service: |
       [SERVICE]
-          Daemon Off
-          Flush {{ .Values.flush }}
-          Log_Level {{ .Values.logLevel }}
-          Parsers_File /fluent-bit/etc/parsers.conf
-          Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
-          HTTP_Server On
-          HTTP_Listen 0.0.0.0
-          HTTP_Port {{ .Values.metricsPort }}
-          Health_Check On
+          Flush        1
+          Daemon       Off
+          Log_Level    info
 
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
@@ -417,15 +411,9 @@ fluent-bit:
           Keep_Log            Off
           Annotations         Off
           Labels              On
-
-      [FILTER]
-          Name    grep
-          Match   kube.*
-          Exclude $kubernetes['namespace_name'] kube-system
       [FILTER]
           Name           modify
           Match          kube.*
-          # Creo un campo filename che concatena i valori
           Rename         kubernetes['namespace_name']   namespace
           Rename         kubernetes['labels']['app']    app
           Rename         kubernetes['pod_name']         pod
@@ -449,9 +437,12 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/parsers
     customParsers: |
       [PARSER]
-          Name    custom-tag
-          Format  regex
-          Regex   ^(?<namespace_name>[^_]+)\.(?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)\.(?<container_name>.+)\.(?<container_id>[a-z0-9]{64})
+        Name        docker
+        Format      json
+        Time_Key    time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L
+        Time_Keep   On
+        Decode_Field_As   escaped    log
 
     # This allows adding more files with arbitrary filenames to /fluent-bit/etc/conf by providing key/value pairs.
     # The key becomes the filename, the value becomes the file content.
