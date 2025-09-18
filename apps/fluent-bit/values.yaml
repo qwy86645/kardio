@@ -399,11 +399,11 @@ fluent-bit:
     ## https://docs.fluentbit.io/manual/pipeline/inputs
     inputs: |
       [INPUT]
-        Name              tail
-        Tag               kube.<namespace_name>.<pod_name>.<container_name>.<container_id>
-        Path              /var/log/containers/*.log
-        Tag_Regex         (?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace_name>[^_]+)_(?<container_name>.+)-(?<container_id>[a-z0-9]{64})\.log$
-        Parser            cri
+          Name              tail
+          Tag               kube.<namespace_name>.<pod_name>.<container_name>.<container_id>
+          Path              /var/log/containers/*.log
+          Tag_Regex         (?<pod_name>[a-z0-9](?:[-a-z0-9]*[a-z0-9])?(?:\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*)_(?<namespace_name>[^_]+)_(?<container_name>.+)-(?<container_id>[a-z0-9]{64})\.log$
+          Parser            cri
 
     ## https://docs.fluentbit.io/manual/pipeline/filters
     filters: |-
