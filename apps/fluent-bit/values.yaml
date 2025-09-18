@@ -424,7 +424,7 @@ fluent-bit:
       [FILTER]
           Name    rewrite_tag
           Match   kube.*
-          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name']/$kubernetes['labels']['app']/$kubernetes['pod_name'].json false
+          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json false
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
