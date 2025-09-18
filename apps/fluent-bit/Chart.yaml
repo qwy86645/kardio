@@ -9,3 +9,5 @@ dependencies:
   repository: https://fluent.github.io/helm-charts
   version: 0.53.0
   alias: app
+  import-values:
+    - values.yaml
