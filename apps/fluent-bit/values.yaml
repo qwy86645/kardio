@@ -433,7 +433,7 @@ fluent-bit:
           Match   *
           Bucket  k-log
           tls.verify false
-          endpoint http://minio.local
+          endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout 1m
           s3_key_format /fluent-bit-logs/$TAG
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
