@@ -421,7 +421,7 @@ fluent-bit:
       [OUTPUT]
           Name    s3
           Match   *
-          Bucket  k-log
+          Bucket  log
           tls.verify false
           region eu-west-1
           endpoint https://minio.minio-kardio.svc.cluster.local
