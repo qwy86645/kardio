@@ -5,16 +5,18 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: git@github.com:qwy86645/kardio.git
-        revision: HEAD
-        directories:
-          - path: apps/*
+  - git:
+      repoURL: git@github.com:qwy86645/kardio.git
+      revision: HEAD
+      directories:
+      - path: apps/*
   template:
     metadata:
       name: "{{path[1]}}"
+      labels:
+        app: "{{path[1]}}"
       finalizers:
-        - resources-finalizer.argocd.argoproj.io
+      - resources-finalizer.argocd.argoproj.io
     spec:
       project: "kardio"
       source:
@@ -29,4 +31,4 @@ spec:
           prune: true
           selfHeal: true
         syncOptions:
-          - CreateNamespace=true
+        - CreateNamespace=true
