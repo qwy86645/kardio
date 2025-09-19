@@ -411,22 +411,23 @@ fluent-bit:
           Annotations       Off
 
       [FILTER]
-          Name           modify
-          Match          kube.*
-          Rename         kubernetes['namespace_name']   namespace
-          Rename         kubernetes['labels']['app']    app
-          Rename         kubernetes['pod_name']         pod
-          Add            s3_key  ${namespace}/${app}/${pod}.json
+          Name    grep
+          Match   kube.*
+          Exclude $kubernetes['namespace_name'] kube-system
+
+      [FILTER]
+          Name    rewrite_tag
+          Match   kube.*
+          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json false
     outputs: |
       [OUTPUT]
           Name    s3
           Match   *
           Bucket  log
           tls.verify false
-          region eu-west-1
           endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout  60s
-          s3_key_format        /%{namespace}/%{app}/%{pod}.json
+          s3_key_format         /$TAG[2]/$TAG[0]/%Y/%m/%d/%H/%M/%S/$UUID.gz
           s3_key_format_tag_delimiters .-
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
     ## This configuration is deprecated, please use `extraFiles` instead.
