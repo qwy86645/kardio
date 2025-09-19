@@ -429,10 +429,10 @@ fluent-bit:
           Match   kube.*
           Exclude $kubernetes['namespace_name'] kube-system
 
-      [FILTER]
-          Name    rewrite_tag
-          Match   kube.*
-          Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json false
+      # [FILTER]
+      #     Name    rewrite_tag
+      #     Match   kube.*
+      #     Rule    $kubernetes['pod_name'] ^(.*)$ $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json false
 
     ## https://docs.fluentbit.io/manual/pipeline/outputs
     outputs: |
@@ -444,7 +444,7 @@ fluent-bit:
           tls.verify false
           endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout  60s
-          s3_key_format         /$TAG[2]/$TAG[0]/%Y/%m/%d/%H/%M/%S/$UUID.gz
+          s3_key_format         $kubernetes['namespace_name'].$kubernetes['labels']['app'].$kubernetes['pod_name'].json
           s3_key_format_tag_delimiters .-
 
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
