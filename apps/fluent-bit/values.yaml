@@ -446,6 +446,7 @@ fluent-bit:
           upload_timeout  60s
           s3_key_format         /fluent-bit-logs/$TAG[0]/$TAG[1].json
           s3_key_format_tag_delimiters .
+          static_file_path true
 
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
     ## This configuration is deprecated, please use `extraFiles` instead.
