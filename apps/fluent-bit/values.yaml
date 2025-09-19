@@ -321,9 +321,9 @@ priorityClassName: ""
 
 env:
 - name: AWS_ACCESS_KEY_ID
-  value: minio
+  value: LT5qGYykuQJk9tbDhB5k
 - name: AWS_SECRET_ACCESS_KEY
-  value: minio123
+  value: AfcZy4VxaiiFRgHjn8RsPHVAx6KFGMLosYb23U3X
 
 # The envWithTpl array below has the same usage as "env", but is using the tpl function to support templatable string.
 # This can be useful when you want to pass dynamic values to the Chart using the helm argument "--set <variable>=<value>"
