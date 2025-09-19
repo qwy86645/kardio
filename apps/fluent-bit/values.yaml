@@ -444,7 +444,7 @@ fluent-bit:
           tls.verify false
           endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout  60s
-          s3_key_format         /$TAG[2]/$TAG[0].json
+          s3_key_format         /fluent-bit-logs/$TAG.json
           s3_key_format_tag_delimiters .-
 
     ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/upstream-servers
