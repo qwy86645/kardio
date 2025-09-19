@@ -424,6 +424,7 @@ fluent-bit:
           Name    s3
           Match   *
           Bucket  log
+          region eu-west-1
           tls.verify false
           endpoint https://minio.minio-kardio.svc.cluster.local
           upload_timeout  60s
