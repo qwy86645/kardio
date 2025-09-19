@@ -319,9 +319,11 @@ terminationGracePeriodSeconds:
 
 priorityClassName: ""
 
-env: []
-#  - name: FOO
-#    value: "bar"
+env:
+- name: AWS_ACCESS_KEY_ID
+  value: minio
+- name: AWS_SECRET_ACCESS_KEY
+  value: minio123
 
 # The envWithTpl array below has the same usage as "env", but is using the tpl function to support templatable string.
 # This can be useful when you want to pass dynamic values to the Chart using the helm argument "--set <variable>=<value>"
